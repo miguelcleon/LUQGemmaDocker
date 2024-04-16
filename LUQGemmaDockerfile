@@ -1,7 +1,8 @@
 FROM python:3.9
 
-pip install -U transformers
+# ... other instructions 
+
+RUN pip install -U transformers  
 
 # Install Hugging Face CLI
-RUN pip install huggingface-cli 
-huggingface-cli download google/gemma-7b-pytorch
+RUN pip install huggingface-cli
