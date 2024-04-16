@@ -37,7 +37,6 @@ jobs:
           push: true
           tags: |
             miguelcleon412/${{ steps.repo_name.outputs.repo_name }}:latest 
-                # Replace 'your-dockerhub-username' 
 
       - name: Image digest
         run: echo ${{ steps.docker_build_gemma.outputs.digest }} 
