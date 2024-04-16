@@ -3,4 +3,5 @@ FROM ubuntu:22.04
 RUN apt-get update && apt-get install -y python3 python3-pip
 # Install Hugging Face CLI
 RUN pip3 install transformers accelerate huggingface-cli gemma 
+RUN huggingface-cli login --token ${{ secrets.HUGGING_FACE_TOKEN }} --add-to-git-credential
 RUN huggingface-cli download google/gemma-7b-pytorch
