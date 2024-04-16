@@ -5,8 +5,11 @@ RUN apt-get update && apt-get install -y build-essential gsl-bin libgsl-dev zlib
 
 # Download GEMMA source or precompiled binary
 # If using the source:
-COPY gemma_source /usr/local/src/
-WORKDIR /usr/local/src/
+RUN wget https://example.com/downloads/gemma-7b-linux-binary -O /usr/local/src/bin/gemma  
+
+# Make the binary executable
+RUN chmod +x /usr/local/src/bin/gemma
+WORKDIR /usr/local/src/bin/gemma
 RUN make 
 
 # Expose the port GEMMA uses (optional)
