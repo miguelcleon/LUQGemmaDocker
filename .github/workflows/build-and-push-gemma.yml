@@ -36,7 +36,9 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: |
-            miguelcleon412/${{ steps.repo_name.outputs.repo_name }}:latest 
+            miguelcleon412/${{ steps.repo_name.outputs.repo_name }}:latest
+          build-args: | 
+            HUGGING_FACE_TOKEN=${{ secrets.HUGGING_FACE_TOKEN }}
 
       - name: Image digest
         run: echo ${{ steps.docker_build_gemma.outputs.digest }} 
