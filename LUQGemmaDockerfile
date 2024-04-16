@@ -3,15 +3,18 @@ FROM ubuntu:latest
 # Install dependencies
 RUN apt-get update && apt-get install -y build-essential gsl-bin libgsl-dev zlib1g-dev 
 RUN apt-get install -y wget
-RUN mkdir -p /usr/local/src/bin
+RUN mkdir -p /usr/local/src
 # Download GEMMA source or precompiled binary
 # If using the source:
-RUN wget https://example.com/downloads/gemma-7b-linux-binary -O /usr/local/src/bin/gemma  
+RUN wget https://github.com/genetics-statistics/GEMMA/releases/download/v0.98.6/gemma-0.98.6-linux-static.tgz -O /usr/local/src/gemma.tgz
 
-# Make the binary executable
-RUN chmod +x /usr/local/src/bin/gemma
-WORKDIR /usr/local/src/bin/gemma
-RUN make 
+# Extract the source code
+RUN cd /usr/local/src/ && tar -xzf gemma.tgz && rm gemma.tgz
+
+# Build GEMMA
+RUN chmod +x /usr/local/src/gemma-0.98.6 
+WORKDIR /usr/local/src/gemma-0.98.6 
+RUN make
 
 # Expose the port GEMMA uses (optional)
 EXPOSE 1234  
